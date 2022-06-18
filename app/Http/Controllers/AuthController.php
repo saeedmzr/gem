@@ -20,7 +20,7 @@ class AuthController extends Controller
 
     public function login(LoginUserRequest $request)
     {
-        $user = $this->userRepository->login($request->phone, $request->password);
+        $user = $this->userRepository->login($request->email, $request->password);
         if (!$user) return new SimpleResource(['message' => 'اطلاعات وارد شده اشتباه است.', 'status' => 422]);
 
         $token = $user->createToken('auth_token')->plainTextToken;
