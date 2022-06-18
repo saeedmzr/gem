@@ -19,8 +19,13 @@ class UserAuthTest extends TestCase
 
         $response->assertStatus(200);
     }
-    public function test_unauthenticated_user_cannot_login()
-    {
 
+    public function test_authenticated_user_can_login()
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->post('api/auth/logout');
+
+        $response->assertStatus(401);
     }
 }
